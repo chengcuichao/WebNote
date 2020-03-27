@@ -287,19 +287,166 @@ caption用来表示表格的标题，格式为`<caption> 表格标题 </caption>
 
 input 标签所具有的属性：
 
-|  属性名   |                           属性说明                           |
-| :-------: | :----------------------------------------------------------: |
-|   type    | 标签类型，包括：text、password、submit、button、radio、checkbox、file等 |
-|   name    |                     表单提交字典的key值                      |
-|   value   |                      文字字段的默认取值                      |
-|   size    |                          控件的长度                          |
-| maxlength |                          最长字符数                          |
+|   属性名    |                           属性说明                           |
+| :---------: | :----------------------------------------------------------: |
+|    type     | 标签类型，包括：text、password、submit、button、radio、checkbox、file等 |
+|    name     |                     表单提交字典的key值                      |
+|    value    |          文字字段的默认取值，也是表单提交的value值           |
+|    size     |                          控件的长度                          |
+|  maxlength  |                          最长字符数                          |
+| placeholder |                     会在输入框里增加提示                     |
+|  autofocus  | 当`autofocus="autofocus"` 时，在页面加载时，域自动地获得焦点。 |
+|    form     | `form` 属性适用于所有 `<input>` 标签的类型,`form` 属性必须引用所属表单的 `id` |
+|  multiple   | 当`multiple="multiple"`时，允许输入域中可选择多个值，适用于 `<input>` 标签：`email` 和 `file` |
+|   pattern   | `pattern`后面跟正则表达式，适用于 `<input>` 标签：text, search, url, telephone, email, password |
 
+input 标签 type 属性详细说明：
 
+| type属性值 |                          属性值说明                          |
+| :--------: | :----------------------------------------------------------: |
+|    text    |                           文本内容                           |
+|  password  |                           密码文本                           |
+|   submit   |                         表单提交按钮                         |
+|   button   |                             按钮                             |
+|   radio    |  单选框 ，checked="checked"（默认选中），name属性相同则互斥  |
+|  checkbox  | 复选框 , checked="checked"（默认选中），name属性相同批量提交数据 |
+|    file    |  文件，依赖form表单的一个属性 enctype="multipart/form-data"  |
+|    rest    |                         重置所选内容                         |
+|   email    |  e-mail 地址的输入域，在提交表单时，会自动验证 email 域的值  |
+|    url     |    URL 地址的输入域，在提交表单时，会自动验证 url 域的值     |
+|   number   | 属性 `max` 设定允许输入的最大值，属性 `min` 设定允许输入的最小值，属性 `value` 设定默认值，属性 `step` 设定合法的数字间隔（比如 `step` 的值为 `2`，则合法的数字为 `-2`,`0`,`2`,`4` 等） |
+|   range    | 显示为滑动条，同样的 `range` 也有 `max`，`min`，`value`，`step` 属性与上面所讲的 `number` 中的一致。 |
+|   color    |                         用于选择颜色                         |
+|  日期选择  | date：选取日、月、年   month：选取月、年   week ：选取周和年   time：选取时间（小时和分钟） datetime：选取时间、日、月、年（UTC 时间） datetime-local ：选取时间、日、月、年（本地时间） |
 
-**2、select标签**
+**2、select与option标签**
 
+select 标签所具有的属性：
 
+|  属性名  |                       属性说明                        |
+| :------: | :---------------------------------------------------: |
+|   size   |                     默认显示几个                      |
+| multiple |           当 `multiple="multiple"` 可以多选           |
+|   name   |                 表单提交字典里的key值                 |
+|  value   |   文本内容写在`option`标签里面，提交字典里的value值   |
+| selected | 写在`option`标签里面，当`selected="selected"`默认选中 |
 
+**3、textarea标签**
 
+textarea 标签所具有的属性：
+
+|   属性名    |       属性说明        |
+| :---------: | :-------------------: |
+|    name     | 表单提交字典里的key值 |
+|    clos     |       代表列数        |
+|    rows     |       代表行数        |
+| placeholder | 会在输入框里增加提示  |
+
+例1：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     <form action="http://localhost:8888/index" method="get">
+         <select name="city" multiple="multiple" size="10">
+             <option value="1">北京</option>
+             <option value="2">天津</option>
+             <option value="3" selected="selected">石家庄</option>
+             <option value="4">南京</option>
+             <option value="5">成都</option>
+             <option value="6">哈尔滨</option>
+         </select>
+         <input type="text" name="user" value="chengcuichao"/>
+         <input type="password" name="pwd" value="949885"/>
+         <input type="button" value="登录1" />
+         <p>请选择：</p>
+         男<input type="radio" name="sex" checked="checked"/>
+         女<input type="radio" name="sex"/>
+         <p>爱好：</p>
+         足球<input type="checkbox" name="like" checked="checked">
+         篮球<input type="checkbox" name="like" checked="checked">
+         羽毛球<input type="checkbox"  name="like">
+         乒乓球<input type="checkbox"  name="like">
+         <p>上传文件</p>
+         <input type="file" name="filename">
+         <p></p>
+         <textarea name="text" placeholder="请输入介绍"></textarea>
+         <input type="submit" value="提交" />
+         <input type="reset" value="重置" />
+     </form>
+</body>
+</html>
+```
+
+ 实例2，将搜索转发到百度搜索：：
+
+```html
+<form action="https://www.baidu.com/s?">
+       <input type="text"  style="width: 400px;height: 30px" name="wd"/>
+       <input type="submit" style="width: 75px;height: 34px;" value="百度一下"/>
+  </form>
+```
+
+#### 13、iframe标签
+
+可以使浏览器窗口中显示不止一个页面，src 便是显示url的页面，width，height表示宽度和高度，`frameborder="0"`表示移除 iframe 的边框。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--iframe - 设置高度与宽度,移除边框-->
+<iframe src="http://baidu.com" frameborder="0" width=100% height="400"></iframe>
+
+ <!--因为 a 标签的 target 属性是名为 shiyanlou 的 iframe 框架，所以在点击链接时页面会显示在 iframe 框架中。-->
+<p><a href="https://baidu.com/" target="baidu">实验楼</a></p>
+<iframe width="400" height="400" name="baidu" ></iframe>
+</body>
+</html>
+```
+
+#### 14、label 标签
+
+```html
+<body>
+    <label for="username">用户名：</label>
+    <input id="username" type="text" name="user" />
+    <!--点击用户名就可以直接输入-->
+</body>
+```
+
+#### 15、datalist 元素
+
+通常，这是作为一个下拉框向用户展示的，在输入框中输入可能匹配的内容。
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <label for="myColor">What's your favorite color?</label>
+    <input type="text" name="myColor" id="myColor" list="mySuggestion" />
+    <datalist id="mySuggestion">
+      <option>black</option>
+      <option>blue</option>
+      <option>green</option>
+      <option>red</option>
+      <option>white</option>
+      <option>yellow</option>
+    </datalist>
+  </body>
+</html>
+```
 
