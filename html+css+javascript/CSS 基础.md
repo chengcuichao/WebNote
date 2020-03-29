@@ -142,6 +142,15 @@ div {color:red;}
 .c1[name='jack']{ width:100px; height:200px; }
 ```
 
+**7、伪类选择器**
+
+CSS 伪类用于向某些选择器添加特殊的效果，前面跟选择器后面加冒号和伪类名。
+
+- :link       应用于未被访问过的链接。
+- :hover   应用于有鼠标指针悬停于其上的元素。
+- :active   应用于被激活的元素，如被点击的链接、被按下的按钮等。
+- :visited  应用于已经被访问过的链接。
+
 ### CSS的基本样式
 
 #### 1、文字样式
@@ -185,13 +194,43 @@ div {color:red;}
 </style>
 ```
 
+#### 2、边框样式
+
+边框 (border) 是围绕元素内容和内边距的一条或多条线，可以设置它的粗细，样式和颜色，边框语法：
+
+```css
+border: border-width||border-style||border-color;
+div {
+  border: 2px solid red;
+}
+/* 
+常用的样式有 dashed（虚线）、dotted（点线）、solid（实线） 
+border-radius:25px;      #圆角边框50%的话变为圆
+box-shadow:5px 5px 4px;  #出现阴影
+*/
+```
+
+也可以通过`border-width`，`border-style`，` border-color`来直接设置。
+
+#### 3、背景
+
+背景常用属性：
+
+|       属性名        |    属性说明    |                           书写格式                           |
+| :-----------------: | :------------: | :----------------------------------------------------------: |
+|  background-color   |    背景颜色    |                    background-color:red;                     |
+|  background-image   |    背景图片    |       background-image:url('image/4.gif');默认重复堆放       |
+| background-position | 背景图片的位置 | background-position-x:10px；移动图片的位置（左右）                background-position-y:10px；  移动图片的位置（上下） |
+|  background-repeat  |  背景如何重复  | repeat-y 只重复竖直方向，repeat-x只上下重复，no-repeat不重复 |
+|   background-size   |  背景图片大小  |  background-size:20px 30px; 第一个设置宽度，第二个设置高度   |
+
 ### CSS的区块化样式
 
-**1、Html 标签的分类**
+#### 1、Html 标签的分类
 
 ​	HTML 中的标签大体被分为三类：块级、行内、行内块。**块级标签**有自己的宽度和高度，也就是可以自定义 width 和 height，除此之外，块级元素独自占据一行高度（float 浮动除外），一般可以作为其他容器使用，可容纳块级元素和行内元素。**行内标签**不可以设置宽（width）和高（height），但可以与其他行内标签位于同一行，行内标签内一般不可以包含块级元素。行内元素的高度一般由元素内部的字体大小决定，宽度由内容的长度控制。**行内块标签**，它既具有块级元素的特点，也有行内元素的特点，它可以自由设置元素宽度和高度，也可以在一行中放置多个行内块级元素。比如 input、img 就是行内块级元素，它可以设置高宽以及一行多个。
 
-2、盒子模型
+#### 2、盒子模型
 
 区块模型也就是我们常说的盒子模型，而所谓盒子模型就是把 HTML 页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。
 
@@ -200,4 +239,191 @@ div {color:red;}
 因此盒子的宽度=左外边距+左边框+左内边距+内容宽度+右内边距+右边框+右外边距。
 
 每个矩形都由元素的内容（content）、内边距（padding）、边框（border）和外边距（margin）组成。
+
+#### 3、Panding
+
+`padding` 内边距位于内容框的外边缘与边界的内边缘之间。`padding-top`：上内边距，`padding-right`：右内边距，`padding-bottom`：下内边距，`padding-left`：左内边距。`padding` 属性接受长度值或百分比值，但不允许使用负值。
+
+#### 4、Margin
+
+外边距（margin）代表 CSS 框周围的外部区域，称为外边距。和 padding 类似，也有 `margin-top`、`margin-right`、`margin-bottom` 和 `margin-left`，与 padding 不同的是 margin 可以是负值。
+
+#### 5、 Overflow
+
+当你使用绝对的值设置了一个框的大小（如，固定像素的宽/高），允许的大小可能不适合放置内容，这种情况下内容会从盒子溢流。我们使用 `overflow` 属性来控制这种情况的发生。
+
+```css
+/*
+auto     当内容过多的时候溢流的内容被隐藏，然后出现滚动条，让我们滚动查看所有的内容。
+hidden   当内容过多，溢流的内容被隐藏。
+visible  当内容过多，溢流的内容被显示在盒子的外边。
+*/
+```
+
+**6、Display**
+
+| 属性值       | 说明                                                         |
+| ------------ | ------------------------------------------------------------ |
+| none         | 让标签消失                                                   |
+| inline       | 把标签设为行内标签                                           |
+| block        | 把标签设为块标签                                             |
+| inline-block | 默认自己有多少占多少，具有block属性，可以设置高度，宽度，padding margin |
+
+行内标签：无法设置高度，宽度，无法设置padding，margin
+		块级标签：设置高度，宽度，可以设置padding，margin
+
+### CSS 的布局模型
+
+#### 1、流动模型
+
+块状元素都会在所处的包含元素内，自上而下按顺序垂直延伸分布，因为在默认状态下，块级元素的宽度都为 100%，实际上，块状元素都会以行的形式占据位置（每一个便签都显示着自己本来默认的那个宽高）。
+
+在流动模型下，行内元素都会在所处的包含元素内从左到右水平分布显示（内联元素可不像块级元素独占一行的）。
+
+#### 2、浮动模型
+
+块状元素都是独占一行，如果现在我们想让两个块状元素并排显示，怎么办呢？设置元素浮动就可以实现。 任何元素在默认情况下是不能浮动的，但可以用 CSS 定义为浮动，如 div、p、table、img 等元素都可以被定义为浮动。
+
+float 可以使块标签堆叠起来
+
+```html
+<head>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      border: 2px blue solid;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <div></div>
+</body>
+```
+
+#### 3、层模型
+
+`position` 主要是让标签固定到屏幕的固定位置，position会把标签变为行内标签，会把标签分层
+
+|              属性示例              |                   说明                    |
+| :--------------------------------: | :---------------------------------------: |
+|          position: fixed;          | 固定在屏幕的特定位置，可以用fixed进行分层 |
+|        position: absolute;         |   固定开始屏幕的位置，不会随下拉而移动    |
+|    position: relative+absolute;    |      固定在relative标签里的相对位置       |
+| top: 0;bottom: 0;left: 0;right: 0; |           离上下左右距离有多远            |
+|            z-index: -2;            |         层级顺序，越大优先级越高          |
+|            opcity: 0.5;            |                  透明度                   |
+
+**固定定位 position: fixed**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pg-header{
+            height: 48px;
+            background-color: black;
+            color: #dddddd;
+            position: fixed;
+            top:0;
+            right: 0;
+            left: 0;
+        }
+        .pg-body{
+            background-color: #dddddd;
+            height: 5000px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pg-header">头部</div>
+    <div class="pg-body">内容</div>
+</body>
+</html>
+<!--始终固定在顶部-->
+```
+
+**绝对定位 absolute**
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style type="text/css">
+      div {
+        width: 200px;
+        height: 200px;
+        border: 5px red solid;
+        position: absolute;
+        left: 100px; /*相对于浏览器向左偏移100像素*/
+        top: 80px; /*相对于浏览器向上偏移80像素*/
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <!-- 相对于浏览器进行定位 -->
+  </body>
+</html>
+```
+
+**相对定位 relative+absolute**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="margin: auto">
+<div style="height: 300px;width: 300px;background-color: aqua;position:relative;margin: 0 auto;">
+    <div style="height: 20px;background-color:greenyellow;width: 20px;position: absolute;left: 0;bottom: 0"></div>
+</div>
+</body>
+</html>
+```
+
+**对标签进行分层**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="display:none;z-index:10; position: fixed;top: 50%;left:50%;
+    margin-left: -250px;margin-top: -200px; background-color:white;height: 400px;width:500px; ">
+
+        <input type="text" />
+        <input type="text" />
+        <input type="text" />
+
+    </div>
+
+    <div style="display:none;z-index:9; position: fixed;background-color: black;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.5;
+    "></div>
+
+    <div style="height: 5000px;background-color: green;">
+        asdfasdf
+    </div>
+</body>
+</html>
+
+```
 
